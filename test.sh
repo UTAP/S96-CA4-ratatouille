@@ -11,24 +11,23 @@ mkdir -p answers
 
 Ratatouille=./$1
 
-for ((i=1; i<=7; i++))
-do
-	echo -e "${Cyan}test$i:${NC}"
+for ((i=1; i<=7; i++)); do
+    echo -e "${Cyan}test$i:${NC}"
 
-	$Ratatouille <testCases/test$i >answers/ans$i
+    $Ratatouille <testCases/test$i >answers/ans$i
 
-	totalLines=$(wc -l < testCases/ans$i)
-	differentLines=$(diff -b -B -w -U 0 testCases/ans$i answers/ans$i | grep -v ^@ | wc -l)
-	presentationError=$(diff -U 0 testCases/ans$i answers/ans$i | grep -v ^@ | wc -l)
-	
-	score=$(( (totalLines-differentLines)*100/totalLines ))
+    totalLines=$(wc -l < testCases/ans$i)
+    differentLines=$(diff -b -B -w -U 0 testCases/ans$i answers/ans$i | grep -v ^@ | wc -l)
+    presentationError=$(diff -U 0 testCases/ans$i answers/ans$i | grep -v ^@ | wc -l)
 
-	echo -e "${Yellow}score: $score%${NC}"
-	if ((presentationError!=0)) && (($(diff -b -B -w -y --suppress-common-lines testCases/ans$i answers/ans$i | wc -l)==0)) ; then
-    	echo -e "${Red}Presentation Error : $presentationError${NC}"
-	fi
-	diff -b -B -w -y --suppress-common-lines testCases/ans$i answers/ans$i
-	echo -e "${Green}---------------------------------------------------${NC}"
+    score=$(( (totalLines-differentLines)*100/totalLines ))
+
+    echo -e "${Yellow}score: $score%${NC}"
+    if ((presentationError!=0)) && (($(diff -b -B -w -y --suppress-common-lines testCases/ans$i answers/ans$i | wc -l)==0)); then
+        echo -e "${Red}Presentation Error : $presentationError${NC}"
+    fi
+    diff -b -B -w -y --suppress-common-lines testCases/ans$i answers/ans$i
+    echo -e "${Green}---------------------------------------------------${NC}"
 done
 
 
