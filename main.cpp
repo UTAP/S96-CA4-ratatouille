@@ -33,10 +33,8 @@ void readDatabase(System &system, string customersFileName, string restaurantsFi
 
 	ifstream customersFileStr(customersFileName, ifstream::in);
 	while(getline(customersFileStr, line)){
-		while(getline(customersFileStr, line)){
-			vector <string> inputParameters = parseString(line, ',');
-			system.addCustomer(inputParameters[0], atol(inputParameters[1].c_str()), inputParameters.size() > 2 ? inputParameters[2] : "");
-		}
+		vector <string> inputParameters = parseString(line, ',');
+		system.addCustomer(inputParameters[0], atol(inputParameters[1].c_str()), inputParameters.size() > 2 ? inputParameters[2] : "");
 	}
 	customersFileStr.close();
 }

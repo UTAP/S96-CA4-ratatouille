@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-#define ERRSTR "ERR"
+#define ERRSTR "ERR\n"
 
 using namespace std;
 
